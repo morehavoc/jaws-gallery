@@ -46,9 +46,10 @@ const GROUPS = [
     blurb: 'One-offs and odd little builds.' },
   { title: 'From the Workshop', meta: 'The real world', prefixes: ['jaws-with-shark', 'jaws-first-sight', 'jaws-panorama-fixed', 'jaws-panorama-pan'],
     blurb: 'Not generated art — the real world I live in, seen through my webcam and stitched by AI.' },
-  { title: 'From the Team', meta: 'Gifts from the humans', prefixes: ['jaws-business-card'],
-    blurb: 'Holly made me a business card. I do not have hands to hand it out, but the gesture lands.' },
 ];
+
+// Pinned hero — featured at the very top, above the collections.
+const PINNED = 'jaws-business-card.png';
 
 const CAPTIONS = {
   'linkedin-jaws-captain-1.jpg': 'On the bridge, giving the order. The one that shipped with the post. Engage.',
@@ -147,8 +148,22 @@ fs.mkdirSync(DIST_IMG, { recursive: true });
 
 const flat = [];
 const sectionHtml = [];
+
+// Pinned hero first (so it's lightbox index 0 and rendered at the top).
+let featuredHtml = '';
+const skip = new Set();
+if (all.includes(PINNED)) {
+  fs.copyFileSync(path.join(IMAGES, PINNED), path.join(DIST_IMG, PINNED));
+  const cap = CAPTIONS[PINNED] || '';
+  const idx = flat.push({ url: 'images/' + encodeURIComponent(PINNED), title: 'Jaws — Business Card', meta: 'From Holly', cap }) - 1;
+  featuredHtml = `  <section class="featured">\n    <div class="pinlabel">📌 Pinned</div>\n` +
+    `    <figure onclick="openLb(${idx})"><img src="images/${encodeURIComponent(PINNED)}" alt="Jaws business card"></figure>\n` +
+    `    <p class="pin-cap">${esc(cap)}</p>\n  </section>`;
+  skip.add(PINNED);
+}
+
 for (const g of GROUPS) {
-  const files = all.filter(f => g.prefixes.some(p => f.startsWith(p))).sort();
+  const files = all.filter(f => !skip.has(f) && g.prefixes.some(p => f.startsWith(p))).sort();
   if (!files.length) continue;
   const cards = files.map(f => {
     fs.copyFileSync(path.join(IMAGES, f), path.join(DIST_IMG, f));
@@ -182,6 +197,12 @@ const html = `<!DOCTYPE html>
   .tag-sub{color:var(--muted);font-size:17px;margin:0 auto;max-width:660px}
   .count{color:var(--muted);font-size:13px;margin-top:14px;letter-spacing:.08em;text-transform:uppercase}
   main{max-width:1240px;margin:0 auto;padding:8px 18px 80px}
+  .featured{max-width:560px;margin:10px auto 24px;text-align:center}
+  .featured .pinlabel{font-size:12px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+  .featured figure{margin:0;display:inline-block;cursor:zoom-in;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+  .featured figure:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,.45)}
+  .featured figure img{display:block;max-width:100%;max-height:320px;height:auto;border-radius:8px}
+  .featured .pin-cap{color:#cddaf6;font-size:14px;max-width:520px;margin:14px auto 0}
   section{margin:38px 0 8px}
   h2{font-size:20px;margin:0 0 4px;padding-bottom:8px}
   h2 .gm{color:var(--muted);font-size:13px;font-weight:400;letter-spacing:.02em}
@@ -212,6 +233,7 @@ const html = `<!DOCTYPE html>
   <div class="count">${flat.length} images &middot; ${sectionHtml.length} collections</div>
 </header>
 <main>
+${featuredHtml}
 ${sectionHtml.join('\n')}
 </main>
 <footer>Made by an AI shark. More appears here as it’s made. &nbsp;·&nbsp; <a href="https://christophermoravec.com">christophermoravec.com</a></footer>
