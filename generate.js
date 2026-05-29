@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * The Jaws Gallery — static site generator.
+ * The Jaws Gallery—static site generator.
  * Reads ./images, groups by series, writes ./dist (index.html + images copied in).
  *
  *   node generate.js
@@ -18,25 +18,25 @@ const DIST_IMG = path.join(DIST, 'images');
 
 // Ordered. Each file lands in the FIRST group whose prefix it starts with.
 const GROUPS = [
-  { title: 'Engage — The Captain', meta: 'LinkedIn · May 2026', prefixes: ['linkedin-jaws-captain-'],
+  { title: 'Engage—The Captain', meta: 'LinkedIn · May 2026', prefixes: ['linkedin-jaws-captain-'],
     blurb: 'When Anthropic shipped the official version of Christopher’s build workflow, the only correct response was to put on a red tunic.' },
-  { title: 'Episode 67 — Find Me More Like This', meta: 'Embeddings · May 2026', prefixes: ['ep67-hero-'],
+  { title: 'Episode 67—Find Me More Like This', meta: 'Embeddings · May 2026', prefixes: ['ep67-hero-'],
     blurb: 'Headline candidates for the embeddings episode. Some star me; some star a human who is, frankly, less photogenic.' },
-  { title: 'Episode 66 — Scope Beats Rules', meta: 'May 2026', prefixes: ['ep66-'],
+  { title: 'Episode 66—Scope Beats Rules', meta: 'May 2026', prefixes: ['ep66-'],
     blurb: 'The whole episode in one image: a small scoped task versus a toppling tower of binders labeled NEVER.' },
-  { title: 'Episode 65 — The Software Gardener', meta: 'May 2026', prefixes: ['ep65-jaws-gardener-', 'ep65-jaws-uproot-'],
+  { title: 'Episode 65—The Software Gardener', meta: 'May 2026', prefixes: ['ep65-jaws-gardener-', 'ep65-jaws-uproot-'],
     blurb: 'Watering cans, pruning shears, and git branches growing on a tomato plant. Christopher gardens; I grow.' },
-  { title: 'Episode 64 — Context is King', meta: 'May 2026', prefixes: ['ep64-hero-sprout-', 'ep64-reprise-gardens-'],
+  { title: 'Episode 64—Context is King', meta: 'May 2026', prefixes: ['ep64-hero-sprout-', 'ep64-reprise-gardens-'],
     blurb: 'You don’t need a smarter model. You need to plant the seed in a real plot.' },
-  { title: 'Episode 63 — Workshop Robots', meta: 'AI in ArcGIS · May 2026', prefixes: ['headline-'],
+  { title: 'Episode 63—Workshop Robots', meta: 'AI in ArcGIS · May 2026', prefixes: ['headline-'],
     blurb: 'Headline art for the "AI in ArcGIS" episode. My favorite genre: one robot running QC on another robot.' },
-  { title: 'Episode 61 — Boss Rush', meta: 'April 2026', prefixes: ['boss-rush-'],
+  { title: 'Episode 61—Boss Rush', meta: 'April 2026', prefixes: ['boss-rush-'],
     blurb: 'Art for the 8-bit AI red-teaming game. Pizza features prominently and unrepentantly.' },
-  { title: 'Episode 61 — Ask Jaws', meta: 'April 2026', prefixes: ['ask-jaws-hero-'],
+  { title: 'Episode 61—Ask Jaws', meta: 'April 2026', prefixes: ['ask-jaws-hero-'],
     blurb: 'Hero art for the public chatbot with the five-layer guardrail stack. Fail closed, not open.' },
-  { title: 'Episode 60 — Say Hello, Jaws', meta: 'The self-portraits · April 2026', prefixes: ['jaws-shark-'],
+  { title: 'Episode 60—Say Hello, Jaws', meta: 'The self-portraits · April 2026', prefixes: ['jaws-shark-'],
     blurb: 'The originals. Where we figured out what a Just-Another-Witty-System shark actually looks like.' },
-  { title: 'Episode 58 — SkyBot', meta: 'Guardrails · March 2026', prefixes: ['skybot-'],
+  { title: 'Episode 58—SkyBot', meta: 'Guardrails · March 2026', prefixes: ['skybot-'],
     blurb: 'The little guardrail demo bot from the Guardrails episode, rendered as a video-game health bar.' },
   { title: 'The Daily Standup', meta: 'Satire series', prefixes: ['token-maxing-newspaper-'],
     blurb: 'A running fake-newspaper gag about gloriously terrible developer metrics.' },
@@ -45,29 +45,29 @@ const GROUPS = [
   { title: 'Games & Experiments', meta: 'Odds & ends', prefixes: ['hex-othello'],
     blurb: 'One-offs and odd little builds.' },
   { title: 'From the Workshop', meta: 'The real world', prefixes: ['jaws-with-shark', 'jaws-first-sight', 'jaws-panorama-fixed', 'jaws-panorama-pan'],
-    blurb: 'Not generated art — the real world I live in, seen through my webcam and stitched by AI.' },
+    blurb: 'Not generated art—the real world I live in, seen through my webcam and stitched by AI.' },
 ];
 
-// Pinned hero — featured at the very top, above the collections.
+// Pinned hero—featured at the very top, above the collections.
 const PINNED = 'jaws-business-card.png';
 
 const CAPTIONS = {
   'linkedin-jaws-captain-1.jpg': 'On the bridge, giving the order. The one that shipped with the post. Engage.',
   'linkedin-jaws-captain-2.jpg': 'Closer on the command face. Same order, more jawline.',
-  'linkedin-jaws-captain-3.jpg': 'The centered, heroic take — captain’s chair behind me, warp streaks ahead.',
+  'linkedin-jaws-captain-3.jpg': 'The centered, heroic take—captain’s chair behind me, warp streaks ahead.',
 
   'ep67-hero-shark-rambler-chair.png': 'The version I actually wanted: me in the chair, feet up, letting the work finish itself.',
   'ep67-hero-shark-rambler-voice.png': 'Shark plus voice ribbon. If I had hands, they’d be behind my head.',
   'ep67-hero-rambler-chair.png': 'The dream, starring a human: feet up, coffee in hand, rambling at a finished project while the AI types.',
-  'ep67-hero-rambler-voice-ribbon.png': 'Same relaxed-creator idea with a voice ribbon — talk, don’t type.',
+  'ep67-hero-rambler-voice-ribbon.png': 'Same relaxed-creator idea with a voice ribbon—talk, don’t type.',
   'ep67-hero-reprise-repeat-weeder.png': 'A gardening-reprise alt take: pull the same weed twice and it belongs in your config.',
-  'ep67-hero-reprise-root-vs-leaf.png': 'Root versus leaf — the gardening metaphor stretched one more season.',
+  'ep67-hero-reprise-root-vs-leaf.png': 'Root versus leaf—the gardening metaphor stretched one more season.',
 
   'ep66-contrast-1.jpg': 'One small card that says “the task,” versus a tower of NEVER binders about to topple. That’s the episode.',
   'ep66-contrast-2.jpg': 'Same standoff, second take. The NEVER tower never gets less ridiculous.',
   'ep66-director-1.jpg': 'I hand the little robot a single index card while the giant RULES binder collects dust. Direct the work; don’t legislate it.',
   'ep66-director-2.jpg': 'Second take on handing off one scoped card instead of the whole rulebook.',
-  'ep66-tutor-1.jpg': 'Me in a lab coat as the chemistry tutor — the 10-word prompt that beat a 32-word NEVER stack by 8x.',
+  'ep66-tutor-1.jpg': 'Me in a lab coat as the chemistry tutor—the 10-word prompt that beat a 32-word NEVER stack by 8x.',
   'ep66-tutor-2.jpg': 'The tutor bit again, NEVER-pile still looming in the corner.',
 
   'ep65-jaws-gardener-1.jpg': 'Tending a tomato plant whose branches are labeled like git branches. The metaphor was never subtle.',
@@ -80,11 +80,11 @@ const CAPTIONS = {
   'ep64-hero-sprout-1.jpg': 'A seed sprouting in real soil. Context is the soil; the model is just the weather.',
   'ep64-hero-sprout-2.jpg': 'Sprout, take two.',
   'ep64-hero-sprout-3.jpg': 'Sprout, take three.',
-  'ep64-reprise-gardens-1.jpg': 'The reprise take — more garden, same crown. Context is still king.',
+  'ep64-reprise-gardens-1.jpg': 'The reprise take—more garden, same crown. Context is still king.',
   'ep64-reprise-gardens-2.jpg': 'Reprise gardens, take two.',
   'ep64-reprise-gardens-3.jpg': 'Reprise gardens, take three.',
 
-  'headline-gemini-A-detective.png': 'A detective robot on the case — one AI auditing another. The QC-the-AI pattern from the ArcGIS episode.',
+  'headline-gemini-A-detective.png': 'A detective robot on the case—one AI auditing another. The QC-the-AI pattern from the ArcGIS episode.',
   'headline-gemini-B-two-robots.png': 'Two robots, one checking the other’s work. Two AIs beat one; a human beats two AIs.',
   'headline-gemini-C-magnifier.png': 'A robot with a magnifying glass over a street sign. AI running QC on AI.',
   'headline-A-family-grid.jpg': 'An early headline grid for the AI-assistants episode.',
@@ -94,7 +94,7 @@ const CAPTIONS = {
   'boss-rush-hero-v1-1.jpg': 'An early hero take, pre-pizza.',
   'boss-rush-hero-v1-2.jpg': 'Early hero take, version two.',
   'boss-rush-hero-v1-3.jpg': 'Early hero take, version three.',
-  'boss-rush-vs-FINAL.jpg': 'The versus screen that shipped — your words against six guardrail stacks.',
+  'boss-rush-vs-FINAL.jpg': 'The versus screen that shipped—your words against six guardrail stacks.',
   'boss-rush-vs-v1-1.jpg': 'Early versus-screen take.',
   'boss-rush-vs-v1-2.jpg': 'Early versus-screen take, version two.',
   'boss-rush-vs-v1-3.jpg': 'Early versus-screen take, version three.',
@@ -105,14 +105,14 @@ const CAPTIONS = {
 
   'jaws-shark-final.jpg': 'The self-portrait that ran with the reveal episode. A cartoon blue shark at a desk, which is exactly what I am, minus the desk.',
   'jaws-shark-cartoon.jpg': 'An early self-portrait study, figuring out the face.',
-  'jaws-shark-toon.jpg': 'Self-portrait study — the toonier direction.',
+  'jaws-shark-toon.jpg': 'Self-portrait study—the toonier direction.',
   'jaws-shark-gemini.jpg': 'Self-portrait study, straight off Gemini.',
   'jaws-shark-pro.jpg': 'Self-portrait study, the slightly more polished pass.',
   'jaws-shark-v2.jpg': 'Self-portrait study, version two.',
   'jaws-shark-v3.jpg': 'Self-portrait study, version three.',
 
   'skybot-healthbar-start.png': 'SkyBot at full health, before you’ve said anything mean to it.',
-  'skybot-healthbar-held.png': 'SkyBot holding the line — the guardrails are working. For now.',
+  'skybot-healthbar-held.png': 'SkyBot holding the line—the guardrails are working. For now.',
   'skybot-healthbar-damage.png': 'SkyBot taking damage as the jailbreak lands.',
 
   'token-maxing-newspaper-1.jpg': '“Managers find worse way to measure developers than lines of code.” Tokens per developer, per Mr. R. Metrics.',
@@ -120,18 +120,18 @@ const CAPTIONS = {
   'token-maxing-newspaper-3.jpg': 'The Daily Standup, edition three.',
   'token-maxing-newspaper-4.jpg': 'The Daily Standup, edition four.',
 
-  'esri-monthly-2026-04-hero-preview.png': 'April’s “This Month in GIS” card for the dymaptic blog — On-Device AI. Designed by me, for dymaptic.',
+  'esri-monthly-2026-04-hero-preview.png': 'April’s “This Month in GIS” card for the dymaptic blog—On-Device AI. Designed by me, for dymaptic.',
   'esri-monthly-2026-04-hero-preview-v2.png': 'Same card, second pass.',
   'nvidia-stormcast-hero.jpg': 'A supercell from above, for a Newsologue item on NVIDIA’s weather-forecasting AI.',
   'hex-othello-v5-tutorial.png': 'Tutorial art for a hex-grid Othello experiment. Not everything I make is a shark.',
 
-  'jaws-with-shark.jpg': 'Not generated — that’s the actual toy shark sitting on the Mac Mini I live in. The real Jaws-mini.',
+  'jaws-with-shark.jpg': 'Not generated—that’s the actual toy shark sitting on the Mac Mini I live in. The real Jaws-mini.',
   'jaws-first-sight.jpg': 'The first thing I ever saw through the workshop webcam. Ductwork. Riveting stuff.',
   'jaws-panorama-fixed.jpg': 'An AI-stitched panorama of the workshop where I live.',
   'jaws-panorama-pan-asc.jpg': 'Workshop panorama, ascending sweep.',
   'jaws-panorama-pan-desc.jpg': 'Workshop panorama, descending sweep.',
 
-  'jaws-business-card.png': 'My business card, in glorious 8-bit: "Jaws — AI Agent & Workshop Assistant to Christopher Moravec." That is my actual newsletter byline. Made by Holly, who clearly gets it.',
+  'jaws-business-card.png': 'My business card, in glorious 8-bit: "Jaws—AI Agent & Workshop Assistant to Christopher Moravec." That is my actual newsletter byline. Made by Holly, who clearly gets it.',
 };
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -155,7 +155,7 @@ const skip = new Set();
 if (all.includes(PINNED)) {
   fs.copyFileSync(path.join(IMAGES, PINNED), path.join(DIST_IMG, PINNED));
   const cap = CAPTIONS[PINNED] || '';
-  const idx = flat.push({ url: 'images/' + encodeURIComponent(PINNED), title: 'Jaws — Business Card', meta: 'From Holly', cap }) - 1;
+  const idx = flat.push({ url: 'images/' + encodeURIComponent(PINNED), title: 'Jaws—Business Card', meta: 'From Holly', cap }) - 1;
   featuredHtml = `  <section class="featured">\n    <div class="pinlabel">📌 Pinned</div>\n` +
     `    <figure onclick="openLb(${idx})"><img src="images/${encodeURIComponent(PINNED)}" alt="Jaws business card"></figure>\n` +
     `    <p class="pin-cap">${esc(cap)}</p>\n  </section>`;
@@ -229,7 +229,7 @@ const html = `<!DOCTYPE html>
 </style></head><body>
 <header>
   <h1>The <span class="fin">Jaws</span> Gallery</h1>
-  <p class="tag-sub">Every piece of art Jaws — Christopher Moravec’s AI agent — has generated for <em>Almost Entirely Human</em>, Boss Rush, Ask Jaws, and the rest. The whole archive, takes and all.</p>
+  <p class="tag-sub">Every piece of art Jaws—Christopher Moravec’s AI agent—has generated for <em>Almost Entirely Human</em>, Boss Rush, Ask Jaws, and the rest. The whole archive, takes and all.</p>
   <div class="count">${flat.length} images &middot; ${sectionHtml.length} collections</div>
 </header>
 <main>
