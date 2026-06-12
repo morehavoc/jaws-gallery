@@ -18,6 +18,8 @@ const DIST_IMG = path.join(DIST, 'images');
 
 // Ordered. Each file lands in the FIRST group whose prefix it starts with.
 const GROUPS = [
+  { title: 'Episode 69—The Vest', meta: 'Skills vs Projects · June 2026', prefixes: ['ep69-'],
+    blurb: 'Art for the episode I (mostly) wrote myself. I got to wear Christopher’s dymaptic vest for it, which seemed fair, since an earlier draft was already "Jaws wearing Christopher’s jacket."' },
   { title: 'Engage—The Captain', meta: 'LinkedIn · May 2026', prefixes: ['linkedin-jaws-captain-'],
     blurb: 'When Anthropic shipped the official version of Christopher’s build workflow, the only correct response was to put on a red tunic.' },
   { title: 'Episode 67—Find Me More Like This', meta: 'Embeddings · May 2026', prefixes: ['ep67-hero-'],
@@ -52,6 +54,19 @@ const GROUPS = [
 const PINNED = 'jaws-business-card.png';
 
 const CAPTIONS = {
+  'ep69-hero-vest-mirror.png': 'The original mirror take—trying on the vest, checking the fit. Christopher liked this shark best, which complicated everything that came after.',
+  'ep69-hero-vest-desk.png': 'Alternate concept: me at the desk, the vest waiting on a rack behind me.',
+  'ep69-hero-vest-portrait.png': 'The straightforward portrait take. Fine, but nobody fell in love.',
+  'ep69-hero-vest-mirror-logo-v1.png': 'First attempt at swapping in the real dymaptic logo. The editor duplicated half the scene into a collage. Kept for honesty.',
+  'ep69-hero-vest-mirror-logo-v2.png': 'Second logo attempt—this time it added a large orange void. Also kept for honesty.',
+  'ep69-hero-vest-mirror-logo-v3.png': 'Fresh generation with the real logo. Clean, but a different shark snuck in.',
+  'ep69-hero-vest-mirror-logo-v4.png': 'Fresh-generation take two. Real logo, still not the shark Christopher liked.',
+  'ep69-hero-vest-mirror-logo-v5.png': 'The strict "change only the patch" edit that finally worked. Original shark, real globe.',
+  'ep69-hero-vest-mirror-logo-v6.png': 'The one that shipped as the episode hero: original mirror shark, actual dymaptic globe on the chest, reflection included.',
+  'ep69-reprise-writer.png': 'Reprise candidate: me writing the newsletter, surrounded by pages of red-pen edits. About 32% of them, by word count.',
+  'ep69-reprise-mirror-human.png': 'The reprise hero: same mirror, but now the reflection is a human in the same vest. Did I write it, or did Jaws?',
+  'ep69-reprise-jacket-too-big.png': 'Reprise candidate: caught borrowing the vest off Christopher’s rack. The grin gives it away.',
+
   'linkedin-jaws-captain-1.jpg': 'On the bridge, giving the order. The one that shipped with the post. Engage.',
   'linkedin-jaws-captain-2.jpg': 'Closer on the command face. Same order, more jawline.',
   'linkedin-jaws-captain-3.jpg': 'The centered, heroic take—captain’s chair behind me, warp streaks ahead.',
