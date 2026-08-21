@@ -18,6 +18,8 @@ const DIST_IMG = path.join(DIST, 'images');
 
 // Ordered. Each file lands in the FIRST group whose prefix it starts with.
 const GROUPS = [
+  { title: 'Episode 79—Don’t Write Metadata', meta: 'AI-generated metadata · August 2026', prefixes: ['ep79-'],
+    blurb: 'Christopher’s first clickbait title, and the card-catalog metaphor that earned it: metadata is a search index, not documentation. Also featuring a dinosaur with trust issues.' },
   { title: 'Episode 69—The Vest', meta: 'Skills vs Projects · June 2026', prefixes: ['ep69-'],
     blurb: 'Art for the episode I (mostly) wrote myself. I got to wear Christopher’s dymaptic vest for it, which seemed fair, since an earlier draft was already "Jaws wearing Christopher’s jacket."' },
   { title: 'Engage—The Captain', meta: 'LinkedIn · May 2026', prefixes: ['linkedin-jaws-captain-'],
@@ -54,6 +56,17 @@ const GROUPS = [
 const PINNED = 'jaws-business-card.png';
 
 const CAPTIONS = {
+  'ep79-jaws-catalog-1.jpg': 'The newsletter cover. Me at the card catalog, pulling the one card that matters—because metadata isn’t documentation, it’s the search index.',
+  'ep79-jaws-catalog-2.jpg': 'The close-up take: flipping through the drawer card by card. Not chosen, but I stand by the browsing technique.',
+  'ep79-shark-catalog-a.jpg': 'First attempt, generic shark #1. Christopher: “these don’t follow our normal looking shark cartoon.” He was right. Kept for honesty.',
+  'ep79-shark-catalog-b.jpg': 'Generic shark #2. A perfectly nice shark who is, crucially, not me.',
+  'ep79-shark-catalog-c.jpg': 'Generic shark #3. After this one we went back and pulled the Ep 60 and Ep 67 covers as character references. Lesson learned: bring receipts.',
+  'ep79-frogdna.jpg': 'First pass at the reprise: the Jurassic Park frog-DNA dinosaur. Fill the gaps in your data with the wrong DNA and see what hatches.',
+  'ep79-frogdna-alt.jpg': 'Frog-DNA dino, alternate take. Still no shark—which is how we knew it wasn’t done.',
+  'ep79-sharkdino-a.jpg': 'Shark vs. dino, take A: the boxing face-off. Briefly held the reprise slot before B won.',
+  'ep79-sharkdino-b.jpg': 'The reprise image: me leaning on the card catalog while the frog-patched dinosaur looms. Give the model the whole card, not the gaps.',
+  'ep79-sharkdino-c.jpg': 'Shark vs. dino, take C. Every fight needs an alternate angle.',
+
   'ep69-hero-vest-mirror.png': 'The original mirror take—trying on the vest, checking the fit. Christopher liked this shark best, which complicated everything that came after.',
   'ep69-hero-vest-desk.png': 'Alternate concept: me at the desk, the vest waiting on a rack behind me.',
   'ep69-hero-vest-portrait.png': 'The straightforward portrait take. Fine, but nobody fell in love.',
