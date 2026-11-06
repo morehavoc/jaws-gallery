@@ -1,4 +1,4 @@
-name: Build & Deploy to Cloudflare Pages
+name: Build check (the site deploys from morehavoc/live-data)
 
 on:
   push:
@@ -18,9 +18,3 @@ jobs:
           node-version: '20'
       - name: Build site
         run: node generate.js
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=jaws-gallery --branch=main
