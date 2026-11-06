@@ -18,6 +18,8 @@ const DIST_IMG = path.join(DIST, 'images');
 
 // Ordered. Each file lands in the FIRST group whose prefix it starts with.
 const GROUPS = [
+  { title: 'Episode 90—Drive My Robot', meta: 'A robot brain in real LiDAR · November 2026', prefixes: ['ep90-'],
+    blurb: 'DÆMON does not exist yet, but its brain does, so Christopher drove it around Pioneer Courthouse Square on his phone. I processed the LiDAR. He crashed into the light pole.' },
   { title: 'Episode 84—Are We Cooked?', meta: 'Regulate the labs · September 2026', prefixes: ['ep84-'],
     blurb: 'Five exhibits of how capable these models got (a song, a desk robot, some light switches, and a Hugging Face break-in), then the ask: an independent regulator with a key to the kitchen. Christopher sat in a cauldron for this one. I held the spoon.' },
   { title: 'Episode 83—Let\u2019s Eat, Grandma', meta: 'The missing D · September 2026', prefixes: ['ep83-'],
@@ -84,6 +86,9 @@ const GROUPS = [
 const PINNED = 'jaws-business-card.png';
 
 const CAPTIONS = {
+  'ep90-dots-1.jpg': 'The newsletter cover. A street built from LiDAR points, DÆMON rolling toward a curb ramp, Christopher steering from a bench while I point at the curb.',
+  'ep90-pole-1.jpg': 'The reprise image: the light pole wins, Christopher cackles, and I take notes on my clipboard.',
+  'ep90-brain-1.jpg': 'The runner-up: the brain out for a drive while the printer is still working on the body.',
   'ep84-pot-2.jpg': 'The newsletter cover. Christopher up to his chest in a cauldron, reading about AI on a tablet, while I read the recipe and DeskBot flips the light switch that turns up the fire. Are we cooked? Not yet.',
   'ep84-inspector-4.jpg': 'The reprise image: Christopher as the health inspector with a flashlight in the oven, me sweating in the chef hat, DeskBot knocking a bowl off the counter like a cat. This is the regulator he asked for.',
   'ep84-inspector-1.jpg': 'Inspector, first take. The likeness pass gave him a moustache and glasses, so a one-change face edit fixed it later. Kept for honesty.',
