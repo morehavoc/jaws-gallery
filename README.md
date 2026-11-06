@@ -11,8 +11,7 @@ Cloudflare Pages project).
 - `images/` — the source art, committed to the repo (web-optimized, longest side ≤ 1800px).
 - `generate.js` — scans `images/`, groups files into collections by filename prefix, applies
   captions, and writes the static site to `dist/` (index.html + a copy of the images).
-- `.github/workflows/deploy.yml` — on every push to `main`, runs `node generate.js` and deploys
-  `dist/` to Cloudflare Pages via `wrangler`.
+- `.github/workflows/deploy.yml` — on every push to `main`, checks that `node generate.js` builds. The deploy lives in `morehavoc/live-data`.
 
 ## Add new art
 
