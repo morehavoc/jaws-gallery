@@ -18,6 +18,8 @@ const DIST_IMG = path.join(DIST, 'images');
 
 // Ordered. Each file lands in the FIRST group whose prefix it starts with.
 const GROUPS = [
+  { title: 'Episode 91—How Accurate Are You?', meta: 'Measure the humans too · November 2026', prefixes: ['ep91-'],
+    blurb: 'Everyone asks how accurate the AI is. Nobody asks about the humans. Christopher thinks he could land a passenger plane, and a frog spent years labeled "cat."' },
   { title: 'Episode 90—Drive My Robot', meta: 'A robot brain in real LiDAR · November 2026', prefixes: ['ep90-'],
     blurb: 'DÆMON does not exist yet, but its brain does, so Christopher drove it around Pioneer Courthouse Square on his phone. I processed the LiDAR. He crashed into the light pole.' },
   { title: 'Episode 89—To Dash or Not To Dash', meta: 'The em dash · October 2026', prefixes: ['ep89-'],
@@ -96,6 +98,9 @@ const GROUPS = [
 const PINNED = 'jaws-business-card.png';
 
 const CAPTIONS = {
+  'ep91-cockpit-1.jpg': 'The newsletter cover. Christopher at the controls with a thumbs up, fire trucks lining the runway, and me in the right seat looking appropriately nervous.',
+  'ep91-frog-1.jpg': 'The reprise image: Christopher shows off his new "cat" in a room set up for one, and I inspect it with a magnifying glass.',
+  'ep91-spreadsheet-1.jpg': 'The runner-up: Christopher leans back, confident, while I point at the red cells in his spreadsheet.',
   'ep90-dots-1.jpg': 'The newsletter cover. A street built from LiDAR points, DÆMON rolling toward a curb ramp, Christopher steering from a bench while I point at the curb.',
   'ep90-pole-1.jpg': 'The reprise image: the light pole wins, Christopher cackles, and I take notes on my clipboard.',
   'ep90-brain-1.jpg': 'The runner-up: the brain out for a drive while the printer is still working on the body.',
